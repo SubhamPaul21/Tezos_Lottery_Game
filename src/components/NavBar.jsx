@@ -12,9 +12,10 @@ function NavBar(props) {
                     <Link className='navbar-brand' to={"/"} style={{ textDecoration: 'none' }}>{props.title}</Link>
                     <Link to={"/rules"} style={{ textDecoration: 'none', fontSize: '22px' }}>Rules</Link>
                     {
-                        props.walletConnected ?
-                            <Navbar.Text> Signed in as: <a href="#login">Mark Otto</a> </Navbar.Text> :
-                            <ConnectWalletBtn />
+                        props.beaconConnection ?
+                            <Navbar.Text>
+                                Signed in as: <Link to={`https://ghostnet.tzkt.io/${props.userAddress}/operations/`} target='_blank'>{props.userAddress.slice(1, 7) + "..." + props.userAddress.slice(-4)}</Link> || {(props.userBalance / 1000000).toLocaleString("en-US")} XTZ </Navbar.Text> :
+                            <ConnectWalletBtn setUserAddress={props.setUserAddress} setBeaconConnection={props.setBeaconConnection} setUserBalance={props.setUserBalance} />
                     }
                 </Container>
             </nav>
@@ -25,7 +26,7 @@ function NavBar(props) {
 
 NavBar.defaultProps = {
     title: "Tezos Lottery Game",
-    walletConnected: false,
+    beaconConnection: false,
 }
 
 NavBar.propTypes = {

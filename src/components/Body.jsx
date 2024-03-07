@@ -35,9 +35,9 @@ function Body(props) {
                                     Buy a lotter ticket for <em>1 XTZ</em> and get lucky chance to win 5 XTZ.
                                 </Card.Text>
                                 {
-                                    props.walletConnected ?
+                                    props.beaconConnection ?
                                         <Button variant="primary" onClick={buyTicketBtn}>BUY A TICKET</Button> :
-                                        <ConnectWalletBtn />
+                                        <ConnectWalletBtn setUserAddress={props.setUserAddress} setBeaconConnection={props.setBeaconConnection} setUserBalance={props.setUserBalance} />
                                 }
                             </Card.Body>
                             <Card.Footer className="text-muted">Lottery Game Closing Soon</Card.Footer>
