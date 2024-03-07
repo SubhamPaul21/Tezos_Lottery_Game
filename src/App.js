@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import Body from './components/Body';
+import Rules from './components/Rules';
+import ErrorPage from './ErrorPage';
+import NavBar from './components/NavBar';
+
+import { Routes, Route } from "react-router-dom";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<NavBar />}>
+          <Route index element={<Body />} />
+          <Route path="rules" element={<Rules />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
 
