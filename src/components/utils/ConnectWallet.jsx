@@ -9,24 +9,15 @@ export default function ConnectWallet(props) {
     // props.SetUserBalance
     // props.setBeaconConnection
 
-    const DAPP_NAME = 'My Awesome Dapp';
+    const DAPP_NAME = 'Tezos Lottery Game';
     const connect = async () => {
         try {
-            console.log("Connecting to Temple Wallet!");
-            const available = await TempleWallet.isAvailable();
-            if (!available) {
-                console.log("Temple Wallet Not Available, Connecting to Beacon Wallet");
+            console.log("Connecting to Beacon Wallet!");
+            try {
                 const options = {
                     name: DAPP_NAME,
-                    iconUrl: 'https://tezostaquito.io/img/favicon.svg',
                     network: { type: props.network },
-                    eventHandlers: {
-                        PERMISSION_REQUEST_SUCCESS: {
-                            handler: async (data) => {
-                                console.log('permission data:', data);
-                            },
-                        },
-                    },
+                    disableDefaultEvents: false,
                 };
 
                 const wallet = new BeaconWallet(options);
@@ -40,30 +31,39 @@ export default function ConnectWallet(props) {
                 props.setBeaconConnection(true);
 
                 // set user Balance
-                const balance = await Tezos.tz.getBalance(userAddress);
+                const balance = await props.Tezos.tz.getBalance(userAddress);
                 props.setUserBalance(balance.toNumber());
                 props.setWallet("Beacon");
-            } else {
-                const wallet = new TempleWallet(DAPP_NAME);
-                await wallet.connect('ghostnet');
+            } catch (error) {
+                console.log("Error connecting to Beacon: ", error);
+                console.log("Beacon Wallet Not Available, Explicitly Connecting to Temple Wallet");
+                const available = await TempleWallet.isAvailable();
+                if (!available) {
+                    throw new Error("No Wallet Found");
+                } else {
+                    const wallet = new TempleWallet(DAPP_NAME);
+                    await wallet.connect('ghostnet');
 
-                // the TempleWallet can return an instance of the Tezos singleton
-                const Tezos = wallet.toTezos();
-                // the TempleWallet can return the user's address
-                const userAddress = wallet.pkh || (await wallet.getPKH());
-                props.setUserAddress(userAddress);
+                    // the TempleWallet can return an instance of the Tezos singleton
+                    const Tezos = wallet.toTezos();
+                    // the TempleWallet can return the user's address
+                    const userAddress = wallet.pkh || (await wallet.getPKH());
+                    props.setUserAddress(userAddress);
 
-                Tezos.setWalletProvider(wallet);
-                console.log(`User address: ${userAddress}`);
-                props.setBeaconConnection(true);
+                    Tezos.setWalletProvider(wallet);
+                    console.log(`User address: ${userAddress}`);
+                    props.setBeaconConnection(true);
 
-                // set user Balance
-                const balance = await Tezos.tz.getBalance(userAddress);
-                props.setUserBalance(balance.toNumber());
-                props.setWallet("Temple");
+                    // set user Balance
+                    const balance = await Tezos.tz.getBalance(userAddress);
+                    props.setUserBalance(balance.toNumber());
+                    props.setWallet("Temple");
+                }
+
             }
         } catch (err) {
             console.log(err);
+            alert(err.message);
         }
     }
 
