@@ -3,11 +3,6 @@ import { TempleWallet } from '@temple-wallet/dapp';
 import React from 'react';
 
 export default function ConnectWallet(props) {
-    // props.Tezos
-    // props.setWallet
-    // props.setUserAddress
-    // props.SetUserBalance
-    // props.setBeaconConnection
 
     const DAPP_NAME = 'Tezos Lottery Game';
     const connect = async () => {
