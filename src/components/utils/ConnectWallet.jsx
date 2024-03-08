@@ -1,10 +1,9 @@
-import Button from 'react-bootstrap/Button';
 import { TempleWallet } from '@temple-wallet/dapp';
 import React, { useState, useEffect } from "react";
 
-export default function connectWalletBtn(props) {
+export default function ConnectWallet(props) {
 
-    const connectWallet = async () => {
+    const connect = async () => {
         try {
             console.log("Connecting to Temple");
             const available = await TempleWallet.isAvailable();
@@ -35,7 +34,7 @@ export default function connectWalletBtn(props) {
     }
 
     return (
-        <Button variant="primary" onClick={connectWallet}>Connect Wallet</Button>
+        <button type="button" class="btn btn-success" onClick={connect}>Connect Wallet</button>
     )
 }
 // export default function ConnectWalletBtn() {

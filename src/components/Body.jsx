@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './css/Body.css'
-import ConnectWalletBtn from './utils/ConnectWalletBtn';
+import ConnectWallet from './utils/ConnectWallet';
 import Participants from './Participants';
 
 function Body(props) {
@@ -37,7 +37,7 @@ function Body(props) {
                                 {
                                     props.beaconConnection ?
                                         <Button variant="primary" onClick={buyTicketBtn}>BUY A TICKET</Button> :
-                                        <ConnectWalletBtn setUserAddress={props.setUserAddress} setBeaconConnection={props.setBeaconConnection} setUserBalance={props.setUserBalance} />
+                                        <ConnectWallet setUserAddress={props.setUserAddress} setBeaconConnection={props.setBeaconConnection} setUserBalance={props.setUserBalance} />
                                 }
                             </Card.Body>
                             <Card.Footer className="text-muted">Lottery Game Closing Soon</Card.Footer>
