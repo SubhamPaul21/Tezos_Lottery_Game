@@ -5,6 +5,7 @@ import DisconnectWallet from './utils/DisconnectWallet';
 import PropTypes from 'prop-types';
 import { Outlet, Link } from "react-router-dom";
 import './css/NavBar.css';
+import React from 'react';
 
 function NavBar(props) {
     return (
@@ -21,7 +22,7 @@ function NavBar(props) {
                                 <DisconnectWallet setUserAddress={props.setUserAddress} setBeaconConnection={props.setBeaconConnection} />
                             </div>
                             :
-                            <ConnectWallet setUserAddress={props.setUserAddress} setBeaconConnection={props.setBeaconConnection} setUserBalance={props.setUserBalance} />
+                            <ConnectWallet Tezos={props.Tezos} setWallet={props.setWallet} network={props.network} setUserAddress={props.setUserAddress} setUserBalance={props.setUserBalance} setBeaconConnection={props.setBeaconConnection} />
                     }
                 </Container>
             </nav>
@@ -36,8 +37,8 @@ NavBar.defaultProps = {
 }
 
 NavBar.propTypes = {
-    title: PropTypes.string,
-    walletConnected: PropTypes.bool,
+    title: PropTypes.string.isRequired,
+    beaconConnection: PropTypes.bool.isRequired,
 }
 
 export default NavBar;

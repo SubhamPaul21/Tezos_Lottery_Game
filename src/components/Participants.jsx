@@ -1,4 +1,5 @@
 import ListGroup from 'react-bootstrap/ListGroup';
+import React from 'react';
 
 const Participants = props => {
     let participants = ["0x1", "0x2", "0x3", "0x4", "0x5", "0x5"]

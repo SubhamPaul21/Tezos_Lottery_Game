@@ -4,25 +4,17 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@taquito/beacon-wallet": "^19.0.2",
-    "@taquito/taquito": "^19.0.2",
+    "@taquito/beacon-wallet": "^17.0.0",
+    "@taquito/taquito": "^17.0.0",
     "@temple-wallet/dapp": "^8.0.0",
-    "bootstrap": "^5.3.3",
-    "buffer": "^6.0.3",
-    "events": "^3.3.0",
-    "globalthis": "^1.0.3",
-    "process": "^0.11.10",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.22.2",
-    "stream-browserify": "^3.0.0",
-    "typedarray-to-buffer": "^4.0.0",
-    "util": "^0.12.5"
+    "react-router-dom": "^6.22.2"
   },
   "devDependencies": {
-    "@vitejs/plugin-react-swc": "^3.3.2",
-    "vite": "^4.4.2"
+    "vite": "^4.4.2",
+    "vite-plugin-node-polyfills": "^0.21.0"
   },
   "scripts": {
     "dev": "vite",

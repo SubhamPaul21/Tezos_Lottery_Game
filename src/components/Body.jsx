@@ -6,13 +6,9 @@ import Col from 'react-bootstrap/Col';
 import './css/Body.css'
 import ConnectWallet from './utils/ConnectWallet';
 import Participants from './Participants';
+import React from 'react';
 
 function Body(props) {
-
-    function buyTicketBtn() {
-        console.log("User bought a ticket for Lotter!");
-    }
-
     return (
         <div className="video-background-holder">
             <video playsInline="playsinline" autoPlay="autoplay" muted="muted" loop="loop">
@@ -31,13 +27,11 @@ function Body(props) {
                             <Card.Header>Book a Ticket NOW!</Card.Header>
                             <Card.Body>
                                 <Card.Title>Your chance to win 5 XTZ :D</Card.Title>
-                                <Card.Text>
-                                    Buy a lotter ticket for <em>1 XTZ</em> and get lucky chance to win 5 XTZ.
-                                </Card.Text>
+                                <Card.Text>Buy a lotter ticket for <em>1 XTZ</em> and get lucky chance to win 5 XTZ. </Card.Text>
                                 {
                                     props.beaconConnection ?
-                                        <Button variant="primary" onClick={buyTicketBtn}>BUY A TICKET</Button> :
-                                        <ConnectWallet setUserAddress={props.setUserAddress} setBeaconConnection={props.setBeaconConnection} setUserBalance={props.setUserBalance} />
+                                        <Button variant="primary" onClick={() => alert("Bought Ticket")}>BUY A TICKET</Button> :
+                                        <ConnectWallet Tezos={props.Tezos} network={props.network} setWallet={props.setWallet} setUserAddress={props.setUserAddress} setUserBalance={props.setUserBalance} setBeaconConnection={props.setBeaconConnection} />
                                 }
                             </Card.Body>
                             <Card.Footer className="text-muted">Lottery Game Closing Soon</Card.Footer>

@@ -1,3 +1,4 @@
+import React from 'react';
 
 const DisconnectWallet = (props) => {
 
@@ -8,7 +9,7 @@ const DisconnectWallet = (props) => {
 
 
     return (
-        <button type="button" class="btn btn-warning" onClick={disconnect}>Disconnect Wallet</button>
+        <button type="button" className="btn btn-warning" onClick={disconnect}>Disconnect Wallet</button>
     )
 }
 
