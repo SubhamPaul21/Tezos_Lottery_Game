@@ -5,6 +5,10 @@ import React from 'react';
 export default function ConnectWallet(props) {
 
     const DAPP_NAME = 'Tezos Lottery Game';
+    let userAddress;
+    let balance;
+    let wallet;
+
     const connect = async () => {
         try {
             console.log("Connecting to Beacon Wallet!");
@@ -15,47 +19,36 @@ export default function ConnectWallet(props) {
                     disableDefaultEvents: false,
                 };
 
-                const wallet = new BeaconWallet(options);
+                wallet = new BeaconWallet(options);
                 await wallet.requestPermissions();
-
-                const userAddress = await wallet.getPKH();
-                props.setUserAddress(userAddress);
-
-                props.Tezos.setWalletProvider(wallet);
-                console.log(`User address: ${userAddress}`);
-                props.setBeaconConnection(true);
-
                 // set user Balance
-                const balance = await props.Tezos.tz.getBalance(userAddress);
-                props.setUserBalance(balance.toNumber());
-                props.setWallet("Beacon");
+                userAddress = await wallet.getPKH();
+                balance = await props.Tezos.tz.getBalance(userAddress);
             } catch (error) {
-                console.log("Error connecting to Beacon: ", error);
+                console.log(error);
                 console.log("Beacon Wallet Not Available, Explicitly Connecting to Temple Wallet");
                 const available = await TempleWallet.isAvailable();
                 if (!available) {
                     throw new Error("No Wallet Found");
                 } else {
-                    const wallet = new TempleWallet(DAPP_NAME);
+                    wallet = new TempleWallet(DAPP_NAME);
                     await wallet.connect('ghostnet');
-
                     // the TempleWallet can return an instance of the Tezos singleton
                     const Tezos = wallet.toTezos();
-                    // the TempleWallet can return the user's address
-                    const userAddress = wallet.pkh || (await wallet.getPKH());
-                    props.setUserAddress(userAddress);
-
-                    Tezos.setWalletProvider(wallet);
-                    console.log(`User address: ${userAddress}`);
-                    props.setBeaconConnection(true);
-
                     // set user Balance
-                    const balance = await Tezos.tz.getBalance(userAddress);
-                    props.setUserBalance(balance.toNumber());
-                    props.setWallet("Temple");
+                    userAddress = await wallet.getPKH();
+                    balance = await Tezos.tz.getBalance(userAddress);
                 }
-
             }
+            console.log(`User address: ${userAddress}`);
+            const contract = await props.Tezos.wallet.at("KT1MTE4jhKdakDivfbi98WcDnpem9y2KyR5v")
+
+            props.setUserAddress(userAddress);
+            props.Tezos.setWalletProvider(wallet);
+            props.setBeaconConnection(true);
+            props.setUserBalance(balance.toNumber());
+            props.setWallet(wallet);
+            props.setContract(contract);
         } catch (err) {
             console.log(err);
             alert(err.message);

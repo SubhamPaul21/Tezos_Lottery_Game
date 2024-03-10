@@ -1,19 +1,28 @@
 import ListGroup from 'react-bootstrap/ListGroup';
 import React from 'react';
 
-const Participants = props => {
-    let participants = ["0x1", "0x2", "0x3", "0x4", "0x5", "0x5"]
+export default function Participants(props) {
+    let participants = ["0x1"];
+    (async function () {
+        const storage = await props.contract.storage();
+        const players = await storage.players;
+        console.log("Participants Before: ", players);
+        // console.log("Player 1: ", players.args[0].string);
+        players.forEach(element => {
+            console.log(element);
+            participants.push(element);
+        })
 
+        console.log("Participants After: ", participants);
 
-    return (
-        <ListGroup variant="flush">
-            {
-                participants.map((participant, index) => {
-                    return <ListGroup.Item action key={index} href={`https://ghostnet.tzkt.io/${participant}/operations/`} target='_blank' > {participant}</ListGroup.Item>
-                })
-            }
-        </ListGroup >
-    )
+        return (
+            <ListGroup variant="flush">
+                {
+                    participants.map((participant, index) => {
+                        return <ListGroup.Item action key={index} href={`https://ghostnet.tzkt.io/${participant}/operations/`} target='_blank' > {participant}</ListGroup.Item>
+                    })
+                }
+            </ListGroup >
+        )
+    })()
 }
-
-export default Participants;

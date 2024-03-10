@@ -5,6 +5,7 @@ const DisconnectWallet = (props) => {
     const disconnect = () => {
         props.setBeaconConnection(false);
         props.setUserAddress("");
+        props.wallet.client.clearActiveAccount();
     }
 
 

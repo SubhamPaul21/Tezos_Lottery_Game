@@ -12,7 +12,8 @@ function App() {
   const NETWORK = "ghostnet";
 
   const [Tezos, setTezos] = useState(new TezosToolkit(RPC_URL));
-  const [wallet, setWallet] = useState(null);
+  const [wallet, setWallet] = useState("");
+  const [contract, setContract] = useState("");
   const [network, setNetwork] = useState(NETWORK);
   const [userAddress, setUserAddress] = useState("");
   const [userBalance, setUserBalance] = useState("");
@@ -26,6 +27,8 @@ function App() {
           setTezos={setTezos}
           wallet={wallet}
           setWallet={setWallet}
+          contract={contract}
+          setContract={setContract}
           network={network}
           setNetwork={setNetwork}
           userAddress={userAddress}
@@ -39,6 +42,8 @@ function App() {
             setTezos={setTezos}
             wallet={wallet}
             setWallet={setWallet}
+            contract={contract}
+            setContract={setContract}
             network={network}
             setNetwork={setNetwork}
             userAddress={userAddress}

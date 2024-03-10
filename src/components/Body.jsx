@@ -7,6 +7,7 @@ import './css/Body.css'
 import ConnectWallet from './utils/ConnectWallet';
 import Participants from './Participants';
 import React from 'react';
+import BuyTicket from './utils/BuyTicket';
 
 function Body(props) {
     return (
@@ -19,7 +20,15 @@ function Body(props) {
                     <Col>
                         <Card style={{ width: '18rem', textAlign: 'center' }} >
                             <Card.Header style={{ fontWeight: "bold" }}>Lottery Game Participants</Card.Header>
-                            <Participants />
+                            {
+                                props.beaconConnection ?
+                                    <Participants contract={props.contract} /> :
+                                    <>
+                                        <br />
+                                        <p>Connect wallet to view Participants ...</p>
+                                        <br />
+                                    </>
+                            }
                         </Card>
                     </Col>
                     <Col>
@@ -27,11 +36,11 @@ function Body(props) {
                             <Card.Header>Book a Ticket NOW!</Card.Header>
                             <Card.Body>
                                 <Card.Title>Your chance to win 5 XTZ :D</Card.Title>
-                                <Card.Text>Buy a lotter ticket for <em>1 XTZ</em> and get lucky chance to win 5 XTZ. </Card.Text>
+                                <Card.Text>Buy a lottery ticket for <em>1 XTZ</em> and get lucky chance to win 5 XTZ. </Card.Text>
                                 {
                                     props.beaconConnection ?
-                                        <Button variant="primary" onClick={() => alert("Bought Ticket")}>BUY A TICKET</Button> :
-                                        <ConnectWallet Tezos={props.Tezos} network={props.network} setWallet={props.setWallet} setUserAddress={props.setUserAddress} setUserBalance={props.setUserBalance} setBeaconConnection={props.setBeaconConnection} />
+                                        <Button variant="primary" onClick={() => BuyTicket(props.contract)}>BUY A TICKET</Button> :
+                                        <ConnectWallet Tezos={props.Tezos} network={props.network} setWallet={props.setWallet} setUserAddress={props.setUserAddress} setUserBalance={props.setUserBalance} setBeaconConnection={props.setBeaconConnection} setContract={props.setContract} />
                                 }
                             </Card.Body>
                             <Card.Footer className="text-muted">Lottery Game Closing Soon</Card.Footer>

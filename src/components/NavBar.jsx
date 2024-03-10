@@ -19,10 +19,10 @@ function NavBar(props) {
                             <div className='wallet-connected-container'>
                                 <Navbar.Text style={{ marginRight: "10px" }}>
                                     Signed in as: <Link to={`https://ghostnet.tzkt.io/${props.userAddress}/operations/`} target='_blank'>{props.userAddress.slice(1, 7) + "..." + props.userAddress.slice(-4)}</Link> || {(props.userBalance / 1000000).toLocaleString("en-US")} XTZ </Navbar.Text>
-                                <DisconnectWallet setUserAddress={props.setUserAddress} setBeaconConnection={props.setBeaconConnection} />
+                                <DisconnectWallet setUserAddress={props.setUserAddress} wallet={props.wallet} setBeaconConnection={props.setBeaconConnection} />
                             </div>
                             :
-                            <ConnectWallet Tezos={props.Tezos} setWallet={props.setWallet} network={props.network} setUserAddress={props.setUserAddress} setUserBalance={props.setUserBalance} setBeaconConnection={props.setBeaconConnection} />
+                            <ConnectWallet Tezos={props.Tezos} network={props.network} setWallet={props.setWallet} setUserAddress={props.setUserAddress} setUserBalance={props.setUserBalance} setBeaconConnection={props.setBeaconConnection} setContract={props.setContract} />
                     }
                 </Container>
             </nav>
