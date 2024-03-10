@@ -42,13 +42,15 @@ export default function ConnectWallet(props) {
             }
             console.log(`User address: ${userAddress}`);
             const contract = await props.Tezos.wallet.at("KT1MTE4jhKdakDivfbi98WcDnpem9y2KyR5v")
-
             props.setUserAddress(userAddress);
             props.Tezos.setWalletProvider(wallet);
-            props.setBeaconConnection(true);
             props.setUserBalance(balance.toNumber());
             props.setWallet(wallet);
             props.setContract(contract);
+            const storage = await contract.storage();
+            props.setContractStorage(storage);
+
+            props.setBeaconConnection(true);
         } catch (err) {
             console.log(err);
             alert(err.message);

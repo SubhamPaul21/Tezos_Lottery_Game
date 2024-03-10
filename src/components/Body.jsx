@@ -18,11 +18,11 @@ function Body(props) {
             <Container className='body-container'>
                 <Row className='body-row'>
                     <Col>
-                        <Card style={{ width: '18rem', textAlign: 'center' }} >
+                        <Card style={{ width: '30rem', textAlign: 'center' }} >
                             <Card.Header style={{ fontWeight: "bold" }}>Lottery Game Participants</Card.Header>
                             {
                                 props.beaconConnection ?
-                                    <Participants contract={props.contract} /> :
+                                    <Participants contractStorage={props.contractStorage} /> :
                                     <>
                                         <br />
                                         <p>Connect wallet to view Participants ...</p>
@@ -40,7 +40,7 @@ function Body(props) {
                                 {
                                     props.beaconConnection ?
                                         <Button variant="primary" onClick={() => BuyTicket(props.contract)}>BUY A TICKET</Button> :
-                                        <ConnectWallet Tezos={props.Tezos} network={props.network} setWallet={props.setWallet} setUserAddress={props.setUserAddress} setUserBalance={props.setUserBalance} setBeaconConnection={props.setBeaconConnection} setContract={props.setContract} />
+                                        <ConnectWallet Tezos={props.Tezos} network={props.network} setWallet={props.setWallet} setUserAddress={props.setUserAddress} setUserBalance={props.setUserBalance} setContractStorage={props.setContractStorage} setBeaconConnection={props.setBeaconConnection} setContract={props.setContract} />
                                 }
                             </Card.Body>
                             <Card.Footer className="text-muted">Lottery Game Closing Soon</Card.Footer>

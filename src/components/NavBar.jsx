@@ -22,7 +22,7 @@ function NavBar(props) {
                                 <DisconnectWallet setUserAddress={props.setUserAddress} wallet={props.wallet} setBeaconConnection={props.setBeaconConnection} />
                             </div>
                             :
-                            <ConnectWallet Tezos={props.Tezos} network={props.network} setWallet={props.setWallet} setUserAddress={props.setUserAddress} setUserBalance={props.setUserBalance} setBeaconConnection={props.setBeaconConnection} setContract={props.setContract} />
+                            <ConnectWallet Tezos={props.Tezos} network={props.network} setWallet={props.setWallet} setUserAddress={props.setUserAddress} setUserBalance={props.setUserBalance} setBeaconConnection={props.setBeaconConnection} setContractStorage={props.setContractStorage} setContract={props.setContract} />
                     }
                 </Container>
             </nav>

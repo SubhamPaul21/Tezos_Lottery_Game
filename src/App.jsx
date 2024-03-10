@@ -14,6 +14,7 @@ function App() {
   const [Tezos, setTezos] = useState(new TezosToolkit(RPC_URL));
   const [wallet, setWallet] = useState("");
   const [contract, setContract] = useState("");
+  const [contractStorage, setContractStorage] = useState({});
   const [network, setNetwork] = useState(NETWORK);
   const [userAddress, setUserAddress] = useState("");
   const [userBalance, setUserBalance] = useState("");
@@ -24,13 +25,12 @@ function App() {
       <Routes>
         <Route path="/" element={<NavBar
           Tezos={Tezos}
-          setTezos={setTezos}
           wallet={wallet}
           setWallet={setWallet}
-          contract={contract}
+          title="Tezos Lottery Game"
           setContract={setContract}
+          setContractStorage={setContractStorage}
           network={network}
-          setNetwork={setNetwork}
           userAddress={userAddress}
           setUserAddress={setUserAddress}
           userBalance={userBalance}
@@ -39,16 +39,13 @@ function App() {
           setBeaconConnection={setBeaconConnection} />}>
           <Route index element={<Body
             Tezos={Tezos}
-            setTezos={setTezos}
-            wallet={wallet}
             setWallet={setWallet}
             contract={contract}
             setContract={setContract}
+            contractStorage={contractStorage}
+            setContractStorage={setContractStorage}
             network={network}
-            setNetwork={setNetwork}
-            userAddress={userAddress}
             setUserAddress={setUserAddress}
-            userBalance={userBalance}
             setUserBalance={setUserBalance}
             beaconConnection={beaconConnection}
             setBeaconConnection={setBeaconConnection} />} />

@@ -8,7 +8,6 @@ const DisconnectWallet = (props) => {
         props.wallet.client.clearActiveAccount();
     }
 
-
     return (
         <button type="button" className="btn btn-warning" onClick={disconnect}>Disconnect Wallet</button>
     )
